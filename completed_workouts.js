@@ -24,12 +24,12 @@ document.addEventListener("DOMContentLoaded", () => {
     exportModal.classList.remove("active");
   });
 
-  exportEmailButton.addEventListener("click", exportToEmail);
-  exportDriveButton.addEventListener("click", exportToDrive);
+  //exportEmailButton.addEventListener("click", exportToEmail);
+  //exportDriveButton.addEventListener("click", exportToDrive);
   exportExcelButton.addEventListener("click", exportToExcel);
 });
 
-// Function to export workouts to an Excel file
+// Function to export workouts to an Excel file with debugging
 function exportToExcel() {
   const workouts = JSON.parse(localStorage.getItem("workouts")) || [];
   if (workouts.length === 0) {
@@ -37,47 +37,57 @@ function exportToExcel() {
     return;
   }
 
-  // Prepare data for Excel
-  const workbook = XLSX.utils.book_new(); // Create a new workbook
-  const worksheetData = [];
+  try {
+    // Prepare data for Excel
+    const workbook = XLSX.utils.book_new(); // Create a new workbook
+    const worksheetData = [];
 
-  // Add headers
-  worksheetData.push([
-    "Date",
-    "Body Part",
-    "Exercise",
-    "Variation",
-    "Sets",
-    "Notes",
-    "Set #",
-    "Reps",
-    "Weight",
-    "Spice",
-  ]);
+    // Add headers
+    worksheetData.push([
+      "Date",
+      "Body Part",
+      "Exercise",
+      "Variation",
+      "Sets",
+      "Notes",
+      "Set #",
+      "Reps",
+      "Weight",
+      "Spice",
+    ]);
 
-  // Populate rows with workout data
-  workouts.forEach((workout) => {
-    workout.setDetails.forEach((set, setIndex) => {
-      worksheetData.push([
-        workout.date, // Date of workout
-        workout.bodyPart, // Body part targeted
-        workout.exercise, // Exercise name
-        workout.variation, // Exercise variation
-        workout.sets, // Total number of sets for the exercise
-        workout.notes, // Notes for the workout
-        setIndex + 1, // Set number
-        set.reps, // Number of reps in this set
-        set.weight, // Weight used in this set
-        set.spice || "N/A", // Optional spice value for the set
-      ]);
+    // Populate rows with workout data
+    workouts.forEach((workout) => {
+      workout.setDetails.forEach((set, setIndex) => {
+        worksheetData.push([
+          workout.date,
+          workout.bodyPart,
+          workout.exercise,
+          workout.variation,
+          workout.sets,
+          workout.notes,
+          setIndex + 1,
+          set.reps,
+          set.weight,
+          set.spice || "N/A",
+        ]);
+      });
     });
-  });
 
-  const worksheet = XLSX.utils.aoa_to_sheet(worksheetData); // Convert data to worksheet
-  XLSX.utils.book_append_sheet(workbook, worksheet, "Completed Workouts"); // Append worksheet to workbook
+    console.log("Worksheet Data:", worksheetData); // Check if data is populated correctly
 
-  // Export to Excel file
-  XLSX.writeFile(workbook, "Completed_Workouts.xlsx");
+    const worksheet = XLSX.utils.aoa_to_sheet(worksheetData); // Convert data to worksheet
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Completed Workouts"); // Append worksheet to workbook
+
+    // Export to Excel file
+    XLSX.writeFile(workbook, "Completed_Workouts.xlsx");
+    console.log("Excel file generated successfully.");
+  } catch (error) {
+    console.error("Error during Excel export:", error);
+    alert(
+      "An error occurred while exporting to Excel. Check console for details."
+    );
+  }
 }
 
 // Function to export workouts via email
