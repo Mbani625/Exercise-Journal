@@ -134,6 +134,7 @@ function saveWorkout(workoutBox) {
     };
   });
 
+  // Construct workout object
   const workout = {
     bodyPart,
     exercise,
@@ -143,6 +144,24 @@ function saveWorkout(workoutBox) {
     notes,
     setDetails,
   };
+
+  // Avoid duplication by checking if workout already exists
+  const isDuplicate = workouts.some((existingWorkout) => {
+    return (
+      existingWorkout.date === workout.date &&
+      existingWorkout.bodyPart === workout.bodyPart &&
+      existingWorkout.exercise === workout.exercise &&
+      JSON.stringify(existingWorkout.setDetails) ===
+        JSON.stringify(workout.setDetails)
+    );
+  });
+
+  if (isDuplicate) {
+    alert("This workout has already been saved.");
+    return;
+  }
+
+  // Add the new workout if it's not a duplicate
   workouts.push(workout);
   localStorage.setItem("workouts", JSON.stringify(workouts));
 

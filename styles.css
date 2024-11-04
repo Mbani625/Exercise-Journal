@@ -146,7 +146,7 @@ textarea {
 
 /* Specific styling for workout list on completed workouts page */
 .workout-list {
-  margin-top: 20px;
+  margin: 20px;
   padding: 10px;
   background-color: #333;
   border-radius: 8px;
@@ -159,6 +159,56 @@ textarea {
 
 .workout-item:last-child {
   border-bottom: none;
+}
+
+/* Modal Styles */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  visibility: hidden; /* Hide modal by default */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* When modal is active */
+.modal.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.modal-content {
+  background-color: #222;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.modal-content h2 {
+  margin-bottom: 15px;
+}
+
+.modal-content button {
+  display: block;
+  margin: 10px auto;
+  padding: 10px 20px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.modal-content button:hover {
+  background-color: #cc0000;
 }
 
 /* Stacking inputs in rows of two for mobile screens */
