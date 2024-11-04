@@ -122,6 +122,7 @@ textarea {
   display: block;
   margin: 10px 0 5px auto;
   padding: 10px 20px;
+  background-color: green;
 }
 
 /* Center Add New Workout Button */

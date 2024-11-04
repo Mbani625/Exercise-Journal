@@ -7,16 +7,17 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <div class="page-title">
+      <h1>Exercise Journal</h1>
+    </div>
     <div id="workouts-container" class="container">
       <!-- Initial Workout Generation Box -->
       <div class="workout-box">
-        <h1>Exercise Journal</h1>
-
         <!-- Main Exercise Input Table -->
         <div class="exercise-input">
           <label for="body-part">Body Part:</label>
           <select class="body-part">
-            <option value="" disabled selected>Body Part</option>
+            <option value="" disabled selected>--</option>
             <option value="chest">Chest</option>
             <option value="back">Back</option>
             <option value="legs">Legs</option>
@@ -24,7 +25,7 @@
 
           <label for="exercise">Exercise:</label>
           <select class="exercise">
-            <option value="" disabled selected>Exercise</option>
+            <option value="" disabled selected>--</option>
             <option value="bench-press">Bench Press</option>
             <option value="squat">Squat</option>
             <option value="deadlift">Deadlift</option>
@@ -32,7 +33,7 @@
 
           <label for="variation">Variation:</label>
           <select class="variation">
-            <option value="" disabled selected>Variation</option>
+            <option value="" disabled selected>--</option>
             <option value="standard">Standard</option>
             <option value="incline">Incline</option>
             <option value="decline">Decline</option>
@@ -63,7 +64,7 @@
                   <th>Set #</th>
                   <th>Reps</th>
                   <th>Weight</th>
-                  <th>Spice (optional)</th>
+                  <th>Spice</th>
                 </tr>
               </thead>
               <tbody class="set-table-body">

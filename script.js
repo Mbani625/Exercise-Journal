@@ -64,7 +64,7 @@ function generateSetRows(workoutBox) {
     const weightCell = document.createElement("td");
     const weightSelect = document.createElement("select");
     weightSelect.classList.add("set-weight");
-    for (let w = 5; w <= 300; w += 5) {
+    for (let w = 5; w <= 1000; w += 5) {
       const option = document.createElement("option");
       option.value = w;
       option.textContent = w + " lbs";
