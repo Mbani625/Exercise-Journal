@@ -1,0 +1,160 @@
+/* Global Styles */
+body {
+  background: linear-gradient(to bottom, #1a1a1a, #333);
+  color: #fff;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.container {
+  max-width: 1100px;
+  width: 100%;
+  margin: 20px;
+  padding: 20px;
+  background-color: #222;
+  border-radius: 12px;
+  position: relative;
+}
+
+/* Hide element */
+.hidden {
+  display: none;
+}
+
+/* Exercise Input Styling */
+.exercise-input {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 10px;
+  background-color: #333;
+  padding: 15px;
+  border-radius: 8px;
+  align-items: center;
+  overflow-x: auto;
+}
+
+.exercise-input label {
+  color: red;
+  flex-shrink: 0;
+}
+
+select,
+input[type="number"],
+input[type="date"],
+button {
+  padding: 8px;
+  border: none;
+  border-radius: 4px;
+  background-color: #444;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+button {
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #cc0000;
+}
+
+/* Set Details and Notes Styling */
+#set-details-and-notes {
+  margin-top: 20px;
+  background-color: #222;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+table {
+  width: 100%;
+  color: #fff;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #444;
+}
+
+thead th {
+  background-color: red;
+}
+
+.notes-section {
+  margin-top: 20px;
+}
+
+textarea {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  background-color: #444;
+  border-radius: 4px;
+  border: none;
+  color: #fff;
+}
+
+/* Save Workout Button Styling */
+.save-workout {
+  display: block;
+  margin: 10px 0 5px auto;
+  padding: 10px 20px;
+}
+
+/* Center Add New Workout Button */
+#add-new-workout,
+#view-completed-workouts {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#add-new-workout:hover,
+#view-completed-workouts:hover {
+  background-color: #cc0000;
+}
+
+/* Specific styling for workout list on completed workouts page */
+.workout-list {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #333;
+  border-radius: 8px;
+}
+
+.workout-item {
+  padding: 10px;
+  border-bottom: 1px solid #444;
+}
+
+.workout-item:last-child {
+  border-bottom: none;
+}
