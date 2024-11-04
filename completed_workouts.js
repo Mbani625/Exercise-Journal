@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
   exportExcelButton.addEventListener("click", exportToExcel);
 });
 
-// Function to export workouts to an Excel file with debugging
+// Function to export workouts based on device type
 function exportToExcel() {
   const workouts = JSON.parse(localStorage.getItem("workouts")) || [];
   if (workouts.length === 0) {
@@ -37,8 +37,21 @@ function exportToExcel() {
     return;
   }
 
+  // Check if the device is mobile
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+  if (isMobile) {
+    // Export as text file for mobile
+    exportToTextFile(workouts);
+  } else {
+    // Export as Excel for desktop
+    exportToExcelFile(workouts);
+  }
+}
+
+// Function to export workouts to an Excel file (for desktops)
+function exportToExcelFile(workouts) {
   try {
-    // Prepare data for Excel
     const workbook = XLSX.utils.book_new(); // Create a new workbook
     const worksheetData = [];
 
@@ -74,8 +87,6 @@ function exportToExcel() {
       });
     });
 
-    console.log("Worksheet Data:", worksheetData); // Check if data is populated correctly
-
     const worksheet = XLSX.utils.aoa_to_sheet(worksheetData); // Convert data to worksheet
     XLSX.utils.book_append_sheet(workbook, worksheet, "Completed Workouts"); // Append worksheet to workbook
 
@@ -88,6 +99,34 @@ function exportToExcel() {
       "An error occurred while exporting to Excel. Check console for details."
     );
   }
+}
+
+// Function to export workouts to a text file (for mobile)
+function exportToTextFile(workouts) {
+  let textContent = "Completed Workouts:\n\n";
+
+  workouts.forEach((workout, index) => {
+    textContent += `Workout ${index + 1}:\n`;
+    textContent += `Date: ${workout.date}, Body Part: ${workout.bodyPart}, Exercise: ${workout.exercise}\n`;
+    textContent += `Variation: ${workout.variation}, Sets: ${workout.sets}, Notes: ${workout.notes}\n`;
+    workout.setDetails.forEach((set, setIndex) => {
+      textContent += `  Set ${setIndex + 1}: Reps ${set.reps}, Weight ${
+        set.weight
+      }, Spice: ${set.spice || "N/A"}\n`;
+    });
+    textContent += "\n";
+  });
+
+  // Create a Blob and initiate download
+  const blob = new Blob([textContent], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "Completed_Workouts.txt";
+  document.body.appendChild(a);
+  a.click();
+  URL.revokeObjectURL(url);
+  a.remove();
 }
 
 // Function to export workouts via email
